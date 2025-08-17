@@ -62,7 +62,7 @@ float t3; // temperatura
 }
 
 // ===== CONFIGURACIÓN =====
-const byte intervaloMinutos = 1; // Cambia este valor para ajustar el intervalo de grabación
+const byte intervaloMinutos = 1; // Intervalo de grabación
 // =========================
 
 void loop() {
@@ -80,7 +80,7 @@ void loop() {
     t2 = ds18b20.getTempCByIndex(1);
     t3 = ds18b20.getTempCByIndex(2);
   
-    // Comparar si cambió el minuto y si coincide con el intervalo
+    // Comparar si cambió el intervalo de grabación y si coincide con el intervalo
     if (now.minute() != lastminute) {
         if ((now.minute() % intervaloMinutos) == 0) {
             grabar();
@@ -88,7 +88,7 @@ void loop() {
         }
     }
 
-    // Comprobar tarjeta SD (opcional, podría hacerse solo en setup para no gastar tiempo aquí)
+    // Comprobar tarjeta SD (opcional)
     if (!SD.begin(CS)) {
         Serial.println("No se pudo inicializar");
         return;
